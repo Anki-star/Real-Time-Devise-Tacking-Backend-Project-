@@ -18,9 +18,11 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
     socket.on("send-location", (data) => {
         io.emit("receive-location",{id:socket.id, ...data});
+        console.log("Location sent to other users");
     });
     socket.on("disconnect", () => {
         io.emit("user-disconnected",socket.id);
+        console.log("user disconnected");
     });
   console.log('New user connected');
 });
